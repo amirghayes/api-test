@@ -11,7 +11,7 @@ export default async function handler(req, res) {
     });
 
     const query = await db.query('CALL P1');
-    console.log(query);
+    console.log(query.rows);
     res.status(200).json(query)
 
   } catch (error) {
