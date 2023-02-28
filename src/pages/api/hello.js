@@ -10,7 +10,7 @@ export default async function handler(req, res) {
       "database": process.env.DB_NAME
     });
 
-    const query = await db.query('P1');
+    const query = await db.query('CALL P1');
     console.log(query);
     res.status(200).json(query)
 
