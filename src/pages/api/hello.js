@@ -6,8 +6,8 @@ export default async function handler(req, res) {
   let result;
   try {
     connection = await mysql.createConnection({
-      host: '130.61.132.4',
-      port: 3306,
+      host: process.env.NEXT_PUBLIC_DB_HOST,
+      port: process.env.NEXT_PUBLIC_DB_PORT,
       user: process.env.NEXT_PUBLIC_DB_USER,
       password: process.env.NEXT_PUBLIC_DB_PASS,
       database: process.env.NEXT_PUBLIC_DB_NAME
