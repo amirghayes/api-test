@@ -3,7 +3,6 @@
 export default async function handler(req, res) {
   const mysql = require('mysql2/promise');
   let connection;
-  let result;
   try {
     connection = await mysql.createConnection({
       host: process.env.NEXT_PUBLIC_DB_HOST,
@@ -15,19 +14,12 @@ export default async function handler(req, res) {
 
     const [rows] = await connection.execute('CALL P1');
     const rowData = rows[0][0];
-    result = `${rowData.ServerStatus},${rowData.ServerVersion}`;
-    // for (const row of rows) {
-    //   // Do something with each row
-    //   console.log(row[0]);
-    //   result += row[0].ID;
-    // }
-    res.status(200).send(result);
+    res.status(200).send(`${rowData.ServerStatus},${rowData.ServerVersion}`);
 
   } catch (error) {
     // Handle error
     console.log(error);
-    res.status(200).json(error, process.env.NEXT_PUBLIC_DB_USER);
-
+    res.status(200).json(error);
   } finally {
     if (connection) {
       await connection.end();
